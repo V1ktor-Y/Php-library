@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+include("./config.php");
 $books_sql = "CREATE TABLE books(
     BookId INTEGER AUTO_INCREMENT,
     Title VARCHAR(60) NOT NULL,
