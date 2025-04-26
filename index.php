@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <script src="" async defer></script>
+
 </body>
 
 </html>
