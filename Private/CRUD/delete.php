@@ -8,7 +8,6 @@ function delete_author(int $author_id)
         die("Could not delete author " . mysqli_error($dbConn));
     }
 }
-
 function delete_genre(int $genre_id)
 {
     include("../Misc/config.php");
@@ -63,7 +62,6 @@ function delete_book_authors(int $book_id, int $author_id)
         die("Could not delete author " . mysqli_error($dbConn));
     }
 }
-
 function delete_book(int $book_id)
 {
     include("../Misc/config.php");
