@@ -1,9 +1,8 @@
 <?php
-include("./config.php");
-
+include("../Misc/config.php");
 $genre_sql = "CREATE TABLE genres(
     GenreId INTEGER AUTO_INCREMENT,
-    GenreName VARCHAR(30) NOT NULL,
+    GenreName VARCHAR(30) UNIQUE NOT NULL,
     PRIMARY KEY(GenreId)
     )ENGINE=INNODB DEFAULT CHARSET=utf8";
 
@@ -11,6 +10,8 @@ $genre_res = mysqli_query($dbConn, $genre_sql);
 if (!$genre_res) {
     die("Could not create genres table" . mysqli_error($dbConn));
 }
+
+echo "Created genres table<br>";
 
 
 $books_sql = "CREATE TABLE books(
@@ -32,14 +33,28 @@ if (!$books_result) {
 
 echo "Created books table<br>";
 
+$positions_sql = "CREATE TABLE positions(
+    PositionId INTEGER AUTO_INCREMENT,
+    Position VARCHAR(30) UNIQUE NOT NULL,
+    PRIMARY KEY(PositionId)
+    )ENGINE=INNODB DEFAULT CHARSET=utf8";
+
+$position_result = mysqli_query($dbConn, $positions_sql);
+if (!$position_result) {
+    die("Could not create positions table<br>" . mysqli_error($dbConn));
+}
+
+echo "Created positions table<br>";
+
 $employee_sql = "CREATE TABLE employees(
     EmployeeId INTEGER AUTO_INCREMENT,
     FirstName VARCHAR(20) NOT NULL,
     LastName VARCHAR(20) NOT NULL,
-    Position VARCHAR(40) NOT NULL,
-    PhoneNumber VARCHAR(20) NOT NULL,
-    Email VARCHAR(30) NOT NULL,
-    PRIMARY KEY(EmployeeId)
+    PositionId INTEGER NOT NULL,
+    PhoneNumber VARCHAR(20) UNIQUE NOT NULL,
+    Email VARCHAR(30) UNIQUE NOT NULL,
+    PRIMARY KEY(EmployeeId),
+    FOREIGN KEY(PositionId) REFERENCES positions(PositionId)
     )ENGINE=INNODB DEFAULT CHARSET=utf8";
 
 $employee_result = mysqli_query($dbConn, $employee_sql);
@@ -49,12 +64,14 @@ if (!$employee_result) {
 
 echo "Created employees table<br>";
 
+
+
 $client_sql = "CREATE TABLE clients(
     ClientId INTEGER AUTO_INCREMENT,
     FirstName VARCHAR(20) NOT NULL,
     LastName VARCHAR(20) NOT NULL,
-    PhoneNumber VARCHAR(20) NOT NULL,
-    Email VARCHAR(30) NOT NULL,
+    PhoneNumber VARCHAR(20) UNIQUE NOT NULL,
+    Email VARCHAR(30) UNIQUE NOT NULL,
     PRIMARY KEY(ClientId)
     ) ENGINE=INNODB DEFAULT CHARSET=utf8";
 
@@ -97,6 +114,9 @@ if (!$authors_res) {
     die("Could not create authors table" . mysqli_error($dbConn));
 }
 
+echo "Created author table<br>";
+
+
 $bookAuthors_sql = "CREATE TABLE book_authors(
     BookId INTEGER NOT NULL,
     AuthorId INTEGER NOT NULL,
@@ -108,6 +128,8 @@ $bookAuthor_result = mysqli_query($dbConn, $bookAuthors_sql);
 if (!$bookAuthor_result) {
     die("Could not create book_authors table" . mysqli_error($dbConn));
 }
+
+echo "Created bookAuthors table<br>";
 
 
 mysqli_close($dbConn);
