@@ -8,7 +8,6 @@ function add_author(string $first_name, string $last_name): void
         die("Could not add Author " . mysqli_error($dbConn));
     }
 }
-
 function add_genre(string $genre_name): void
 {
     include("../Misc/config.php");
@@ -18,7 +17,6 @@ function add_genre(string $genre_name): void
         die("Could not add Genre " . mysqli_error($dbConn));
     }
 }
-
 function add_position(string $position_name): void
 {
     include("../Misc/config.php");
@@ -28,7 +26,6 @@ function add_position(string $position_name): void
         die("Could not add Position " . mysqli_error($dbConn));
     }
 }
-
 function add_client(string $first_name, string $last_name, string $email, string $phone_number): void
 {
     include("../Misc/config.php");
@@ -38,7 +35,6 @@ function add_client(string $first_name, string $last_name, string $email, string
         die("Could not add Client " . mysqli_error($dbConn));
     }
 }
-
 // User will be able to select position from a drop down menu which will then be processed into position_id.
 function add_employee(string $first_name, string $last_name, string $email, string $phone_number, int $position_id): void
 {
@@ -49,7 +45,6 @@ function add_employee(string $first_name, string $last_name, string $email, stri
         die("Could not add Employee " . mysqli_error($dbConn));
     }
 }
-
 function add_book_authors(int $book_id, int $author_id)
 {
     include("../Misc/config.php");
@@ -59,7 +54,6 @@ function add_book_authors(int $book_id, int $author_id)
         die("Could not add BookAuthor " . mysqli_error($dbConn));
     }
 }
-
 function add_book(string $title, int $year, string $publisher, int $genre_id, int $times_borrowed, array $authors): void
 {
     include("../Misc/config.php");
@@ -73,7 +67,6 @@ function add_book(string $title, int $year, string $publisher, int $genre_id, in
         add_book_authors(mysqli_insert_id($dbConn), $author_id);
     }
 }
-
 function add_borrow(int $book_id, int $client_id, int $employee_id)
 {
     include("../Misc/config.php");

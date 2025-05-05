@@ -8,7 +8,6 @@ function update_author(int $author_id, string $first_name, string $last_name)
         die("Could not update author " . mysqli_error($dbConn));
     }
 }
-
 function update_genre(int $genre_id, string $genre_name)
 {
     include("../Misc/config.php");
@@ -63,7 +62,6 @@ function update_book_author(int $author_id, int $book_id)
         die("Could not update author " . mysqli_error($dbConn));
     }
 }
-
 function update_book(int $book_id, string $title, int $year, string $publisher, int $genre_id, int $times_borrowed, bool $is_available, array $authors)
 {
     include("../Misc/config.php");

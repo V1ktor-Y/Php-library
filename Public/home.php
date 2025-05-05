@@ -7,10 +7,17 @@
     <title>Alexandria</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./CSS/style.css">
+
+    <!-- Import google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    Home Page
+    <div class="bg"></div>
+    <div class="title-card">LIBRARY OF ALEXANDRIA</div>
 </body>
 
 </html>
