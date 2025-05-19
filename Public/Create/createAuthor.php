@@ -66,7 +66,7 @@
 
     <div class="grid">
         <div class="grid-elem">
-            <h2>Author</h2>
+            <h2>Create Author</h2>
             <form method="post">
                 Author First Name <input type="text" name="first_name"><br>
                 Author Last Name <input type="text" name="last_name"><br>

@@ -21,26 +21,26 @@
     <div class="dropdown-create">
         <button class="dropbtn">Create</button>
         <div class="dropdown-content">
-            <a href="./createAuthor.php">Author</a>
-            <a href="./createBook.php">Book</a>
-            <a href="./createBorrow.php">Borrow</a>
-            <a href="./createEmployee.php">Employee</a>
-            <a href="./createGenre.php">Genre</a>
-            <a href="./createPosition.php">Position</a>
-            <a href="./createClient.php">Client</a>
+            <a href="../Create/createAuthor.php">Author</a>
+            <a href="../Create/createBook.php">Book</a>
+            <a href="../Create/createBorrow.php">Borrow</a>
+            <a href="../Create/createEmployee.php">Employee</a>
+            <a href="../Create/createGenre.php">Genre</a>
+            <a href="../Create/createPosition.php">Position</a>
+            <a href="../Create/createClient.php">Client</a>
         </div>
     </div>
 
     <div class="dropdown-update">
         <button class="dropbtn">Update</button>
         <div class="dropdown-content">
-            <a href="../Update/updateAuthor.php">Author</a>
-            <a href="../Update/updateBook.php">Book</a>
-            <a href="../Update/updateBorrow.php">Borrow</a>
-            <a href="../Update/updateEmployee.php">Employee</a>
-            <a href="../Update/updateGenre.php">Genre</a>
-            <a href="../Update/updatePosition.php">Position</a>
-            <a href="../Update/updateClient.php">Client</a>
+            <a href="./updateAuthor.php">Author</a>
+            <a href="./updateBook.php">Book</a>
+            <a href="./updateBorrow.php">Borrow</a>
+            <a href="./updateEmployee.php">Employee</a>
+            <a href="./updateGenre.php">Genre</a>
+            <a href="./updatePosition.php">Position</a>
+            <a href="./updateClient.php">Client</a>
         </div>
     </div>
 
@@ -63,12 +63,51 @@
             <a href="../Read/read.php">Query</a>
         </div>
     </div>
-
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST["id"];
+        $book = $_POST["book"];
+        $client = $_POST["client"];
+        $employee = $_POST["employee"];
+        $borrow_date = $_POST["borrow_date"];
+        $return_date = $_POST["return_date"];
+        if (!$book || !$client || !$employee || !$date) {
+            die("Please fill in all fields");
+        }
+        include '../../Private/CRUD/update.php';
+        update_borrow($id, $book, $client, $employee, $borrow_date, $return_date);
+        echo "Borrow updated";
+    }
+    ?>
     <div class="grid">
         <div class="grid-elem">
-            <h2>Create Borrow</h2>
+            <h2>Update Borrow</h2>
             <form method="post">
-                Book <select name="book" class="select-button">
+                Borrow <select name="id" class="select-button">
+                    <?php
+                    $serverName = "localhost";
+                    $userName = "root";
+                    $password = "";
+                    $dbName = "alexandria";
+
+                    if (!$dbConn = mysqli_connect($serverName, $userName, $password, $dbName)) {
+                        die("Could not connect to db<br>" . mysqli_connect_error());
+                    }
+                    if (!mysqli_select_db($dbConn, $dbName)) {
+                        die("Could not select db<br>" . mysqli_connect_error());
+                    }
+                    $sql = "SELECT * FROM borrows";
+                    $result = mysqli_query($dbConn, $sql);
+                    while ($elem = mysqli_fetch_array($result)) {
+                        $id = $elem["BorrowId"];
+                        $client = $elem["ClientId"];
+                        $date = $elem["ReturnDate"];
+
+                        echo "<option class='select-button' value='$id'>Client Id: $client | Return Date: $date</option>";
+                    }
+                    ?>
+                </select><br>
+                Book <select name="id" class="select-button">
                     <?php
                     $serverName = "localhost";
                     $userName = "root";
@@ -86,6 +125,7 @@
                     while ($elem = mysqli_fetch_array($result)) {
                         $id = $elem["BookId"];
                         $title = $elem["Title"];
+
                         echo "<option class='select-button' value='$id'>$title</option>";
                     }
                     ?>
@@ -139,23 +179,15 @@
                     ?>
                 </select><br>
 
-                Return Date <input type="date" name="date" class="select-button"><br>
+                Borrow Date <input type="date" name="borrow_date" class="select-button"><br>
+                Return Date <input type="date" name="return_date" class="select-button"><br>
                 <br><input type="submit" class="submit-button"><br>
-            </form>
-            <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $book = $_POST["book"];
-                $client = $_POST["client"];
-                $employee = $_POST["employee"];
-                $date = $_POST["date"];
-                if (!$book || !$client || !$employee || !$date) {
-                    die("Please fill in all fields");
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    echo "Borrow updated";
                 }
-                include '../../Private/CRUD/create.php';
-                add_borrow($book, $client, $employee, $date);
-                echo "Borrow created";
-            }
-            ?>
+                ?>
+            </form>
         </div>
     </div>
 

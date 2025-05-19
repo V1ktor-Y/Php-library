@@ -66,7 +66,7 @@
 
     <div class="grid">
         <div class="grid-elem">
-            <h2>Genre</h2>
+            <h2>Create Genre</h2>
             <form method="post">
                 Genre Name <input type="text" name="genre"><br>
                 <br><input type="submit" class="submit-button"><br>

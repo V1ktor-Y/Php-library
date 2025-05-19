@@ -66,7 +66,7 @@
 
     <div class="grid">
         <div class="grid-elem">
-            <h2>Position</h2>
+            <h2>Create Position</h2>
             <form method="post">
                 Position Name <input type="text" name="position"><br>
                 <br><input type="submit" class="submit-button"><br>

@@ -66,7 +66,7 @@
 
     <div class="grid">
         <div class="grid-elem">
-            <h2>Client</h2>
+            <h2>Create Client</h2>
             <form method="post">
                 First Name <input type="text" name="fn"><br>
                 Last Name <input type="text" name="ln"><br>

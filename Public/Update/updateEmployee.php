@@ -21,26 +21,26 @@
     <div class="dropdown-create">
         <button class="dropbtn">Create</button>
         <div class="dropdown-content">
-            <a href="./createAuthor.php">Author</a>
-            <a href="./createBook.php">Book</a>
-            <a href="./createBorrow.php">Borrow</a>
-            <a href="./createEmployee.php">Employee</a>
-            <a href="./createGenre.php">Genre</a>
-            <a href="./createPosition.php">Position</a>
-            <a href="./createClient.php">Client</a>
+            <a href="../Create/createAuthor.php">Author</a>
+            <a href="../Create/createBook.php">Book</a>
+            <a href="../Create/createBorrow.php">Borrow</a>
+            <a href="../Create/createEmployee.php">Employee</a>
+            <a href="../Create/createGenre.php">Genre</a>
+            <a href="../Create/createPosition.php">Position</a>
+            <a href="../Create/createClient.php">Client</a>
         </div>
     </div>
 
     <div class="dropdown-update">
         <button class="dropbtn">Update</button>
         <div class="dropdown-content">
-            <a href="../Update/updateAuthor.php">Author</a>
-            <a href="../Update/updateBook.php">Book</a>
-            <a href="../Update/updateBorrow.php">Borrow</a>
-            <a href="../Update/updateEmployee.php">Employee</a>
-            <a href="../Update/updateGenre.php">Genre</a>
-            <a href="../Update/updatePosition.php">Position</a>
-            <a href="../Update/updateClient.php">Client</a>
+            <a href="./updateAuthor.php">Author</a>
+            <a href="./updateBook.php">Book</a>
+            <a href="./updateBorrow.php">Borrow</a>
+            <a href="./updateEmployee.php">Employee</a>
+            <a href="./updateGenre.php">Genre</a>
+            <a href="./updatePosition.php">Position</a>
+            <a href="./updateClient.php">Client</a>
         </div>
     </div>
 
@@ -63,13 +63,26 @@
             <a href="../Read/read.php">Query</a>
         </div>
     </div>
-
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST["id"];
+        $position = $_POST["position"];
+        $first_name = $_POST["first_name"];
+        $last_name = $_POST["last_name"];
+        $phone_number = $_POST["phone_number"];
+        $email = $_POST["email"];
+        if (!$first_name || !$email || !$id || !$last_name || !$phone_number || !$position) {
+            die("Please fill in all fields");
+        }
+        include '../../Private/CRUD/update.php';
+        update_employee($id, $first_name, $last_name, $email, $phone_number, $position);
+    }
+    ?>
     <div class="grid">
         <div class="grid-elem">
-            <h2>Create Book</h2>
+            <h2>Update Employee</h2>
             <form method="post">
-                Book Title <input type="text" name="title"><br>
-                Author <select name="author[]" class="select-button" multiple>
+                Employee <select name="id" class="select-button">
                     <?php
                     $serverName = "localhost";
                     $userName = "root";
@@ -82,20 +95,23 @@
                     if (!mysqli_select_db($dbConn, $dbName)) {
                         die("Could not select db<br>" . mysqli_connect_error());
                     }
-                    $sql = "SELECT * FROM authors";
+                    $sql = "SELECT * FROM employees";
                     $result = mysqli_query($dbConn, $sql);
                     while ($elem = mysqli_fetch_array($result)) {
-                        $id = $elem["AuthorId"];
+                        $id = $elem["EmployeeId"];
                         $fn = $elem["FirstName"];
                         $ln = $elem["LastName"];
+                        $email = $elem["Email"];
 
-                        echo "<option class='select-button' value='$id'>$fn $ln</option>";
+                        echo "<option class='select-button' value='$id'>$fn $ln $email</option>";
                     }
                     ?>
                 </select><br>
-                Publish Year <input type="number" name="year"><br>
-                Publisher <input type="text" name="publisher"><br>
-                Genre <select name="genre" class="select-button">
+                New Employee First Name <input type="text" name="first_name"><br>
+                New Employee Last Name <input type="text" name="last_name"><br>
+                New Employee Phone Number <input type="text" name="phone_number"><br>
+                New Employee Email <input type="text" name="email"><br>
+                New Position <select name="position" class="select-button">
                     <?php
                     $serverName = "localhost";
                     $userName = "root";
@@ -108,34 +124,23 @@
                     if (!mysqli_select_db($dbConn, $dbName)) {
                         die("Could not select db<br>" . mysqli_connect_error());
                     }
-                    $sql = "SELECT * FROM genres";
+                    $sql = "SELECT * FROM positions";
                     $result = mysqli_query($dbConn, $sql);
                     while ($elem = mysqli_fetch_array($result)) {
-                        $id = $elem["GenreId"];
-                        $gn = $elem["GenreName"];
+                        $id = $elem["PositionId"];
+                        $pn = $elem["Position"];
 
-                        echo "<option class='select-button' value='$id'>$gn</option>";
+                        echo "<option class='select-button' value='$id'>$pn</option>";
                     }
                     ?>
                 </select><br>
-
                 <br><input type="submit" class="submit-button"><br>
-            </form>
-            <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $title = $_POST["title"];
-                $author = $_POST["author"];
-                $year = $_POST["year"];
-                $publisher = $_POST["publisher"];
-                $genre = $_POST["genre"];
-                if (!$title || !$author || !$year || !$publisher || !$genre) {
-                    die("Please fill in all fields");
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    echo "Employee updated";
                 }
-                include '../../Private/CRUD/create.php';
-                add_book($title, $year, $publisher, $genre, $author);
-                echo "Book created";
-            }
-            ?>
+                ?>
+            </form>
         </div>
     </div>
 
