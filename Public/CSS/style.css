@@ -1,37 +1,192 @@
-body, html{
-    height: 100%;
-    margin: 0;
-    background-color: saddlebrown;
+body,
+html {
+	height: 100%;
+	margin: 0;
+	background-color: saddlebrown;
 }
 
-.bg{
-    background-image: url(../res/library.jpg);
-    height: 100%;
+.bg {
+	background-image: url(../res/library.jpg);
+	height: 100%;
 
-    filter: blur(4px);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    background-size: 100%, 100%;
+	filter: blur(4px);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100%, 100%;
+}
+
+a {
+	text-decoration: none;
+	color: white;
 }
 
 .title-card {
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
-    color: white;
-    font-weight: bold;
-    border: 3px solid #f1f1f1;
-    position: absolute;
-    top: 0%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    z-index: 2;
-    width: 50%;
-    padding: 20px;
-    text-align: center;
-    font-size: 28pt;
-    font-family: "Luxurious Roman", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4);
+	color: white;
+	font-weight: bold;
+	position: absolute;
+	top: 0%;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	z-index: 2;
+	width: 98%;
+	padding: 20px;
+	text-align: center;
+	font-size: 28pt;
+	font-family: 'Luxurious Roman', serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.dropbtn {
+	background-color: saddlebrown;
+	color: white;
+	padding: 16px;
+	font-size: 16pt;
+	font-family: 'Luxurious Roman', serif;
+	font-weight: 400;
+	font-style: normal;
+	border: none;
+}
+
+.dropdown-create {
+	z-index: 5;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	font-size: 16pt;
+	font-family: 'Luxurious Roman', serif;
+	font-weight: 400;
+	font-style: normal;
+	transform: translate(20%, 30%);
+	display: inline-block;
+}
+
+.dropdown-delete {
+	z-index: 5;
+	position: absolute;
+	top: 0%;
+	left: 5%;
+	font-size: 16pt;
+	font-family: 'Luxurious Roman', serif;
+	font-weight: 400;
+	font-style: normal;
+	transform: translate(20%, 30%);
+	display: inline-block;
+}
+
+.dropdown-update {
+	z-index: 5;
+	position: absolute;
+	top: 0%;
+	right: 0%;
+	font-size: 16pt;
+	font-family: 'Luxurious Roman', serif;
+	font-weight: 400;
+	font-style: normal;
+	transform: translate(-20%, 30%);
+	display: inline-block;
+}
+
+.dropdown-read {
+	z-index: 5;
+	position: absolute;
+	top: 0%;
+	right: 5%;
+	font-size: 16pt;
+	font-family: 'Luxurious Roman', serif;
+	font-weight: 400;
+	font-style: normal;
+	transform: translate(-25%, 30%);
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+.dropdown-create:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown-create:hover .dropbtn {
+	background-color: rgba(139, 69, 19, 0.637);
+}
+
+.dropdown-update:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown-update:hover .dropbtn {
+	background-color: rgba(139, 69, 19, 0.637);
+}
+
+.dropdown-delete:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown-delete:hover .dropbtn {
+	background-color: rgba(139, 69, 19, 0.637);
+}
+
+.dropdown-read:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown-read:hover .dropbtn {
+	background-color: rgba(139, 69, 19, 0.637);
+}
+
+.grid {
+	display: grid;
+	place-items: center;
+	width: 33%;
+	height: 66%;
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	background: rgba(227, 151, 85, 0.763);
+	transform: translate(-50%, -25%);
+}
+
+.grid-elem {
+	text-align: center;
+	font-size: 16pt;
+	font-family: 'Luxurious Roman', serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.submit-button {
+	text-align: center;
+	font-size: 16pt;
+	font-family: 'Luxurious Roman', serif;
+	font-weight: 400;
+	font-style: normal;
+	align-self: end;
+	background-color: saddlebrown;
+	width: 40%;
+	height: 30px;
+}
+
+.submit-button:hover {
+	background-color: rgba(139, 69, 19, 0.637);
+}

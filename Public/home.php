@@ -17,7 +17,42 @@
 
 <body>
     <div class="bg"></div>
-    <div class="title-card">LIBRARY OF ALEXANDRIA</div>
+    <div class="title-card"><a href="home.php">LIBRARY OF ALEXANDRIA</a></div>
+    <div class="dropdown-create">
+        <button class="dropbtn">Create</button>
+        <div class="dropdown-content">
+            <a href="./Create/createAuthor.php">Author</a>
+            <a href="#">Book</a>
+            <a href="#">Genre</a>
+        </div>
+    </div>
+
+    <div class="dropdown-update">
+        <button class="dropbtn">Update</button>
+        <div class="dropdown-content">
+            <a href="#">Author</a>
+            <a href="#">Book</a>
+            <a href="#">Genre</a>
+        </div>
+    </div>
+
+    <div class="dropdown-delete">
+        <button class="dropbtn">Delete</button>
+        <div class="dropdown-content">
+            <a href="#">Author</a>
+            <a href="#">Book</a>
+            <a href="#">Genre</a>
+        </div>
+    </div>
+
+    <div class="dropdown-read">
+        <button class="dropbtn">Search</button>
+        <div class="dropdown-content">
+            <a href="#">Author</a>
+            <a href="#">Book</a>
+            <a href="#">Genre</a>
+        </div>
+    </div>
 </body>
 
 </html>
