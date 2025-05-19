@@ -92,7 +92,7 @@ function add_employee(string $first_name, string $last_name, string $email, stri
     if (!mysqli_select_db($dbConn, $dbName)) {
         die("Could not select db<br>" . mysqli_connect_error());
     }
-    $sql = "INSERT INTO clients(FirstName, LastName, Email, PhoneNumber, PositionId) VALUES('$first_name', '$last_name', '$email', '$phone_number', $position_id)";
+    $sql = "INSERT INTO employees(FirstName, LastName, Email, PhoneNumber, PositionId) VALUES('$first_name', '$last_name', '$email', '$phone_number', $position_id)";
     $result = mysqli_query($dbConn, $sql);
     if (!$result) {
         die("Could not add Employee " . mysqli_error($dbConn));
@@ -117,7 +117,7 @@ function add_book_authors(int $book_id, int $author_id)
         die("Could not add BookAuthor " . mysqli_error($dbConn));
     }
 }
-function add_book(string $title, int $year, string $publisher, int $genre_id, int $times_borrowed, array $authors): void
+function add_book(string $title, int $year, string $publisher, int $genre_id, array $authors): void
 {
     $serverName = "localhost";
     $userName = "root";
@@ -130,14 +130,15 @@ function add_book(string $title, int $year, string $publisher, int $genre_id, in
     if (!mysqli_select_db($dbConn, $dbName)) {
         die("Could not select db<br>" . mysqli_connect_error());
     }
-    $sql = "INSERT INTO books(Title, PublishYear, Publisher, GenreId, TimesBorrowed) VALUES('$title', $year, '$publisher', $genre_id, $times_borrowed)";
+    $sql = "INSERT INTO books(Title, PublishYear, Publisher, GenreId) VALUES('$title', $year, '$publisher', $genre_id)";
     $result = mysqli_query($dbConn, $sql);
     if (!$result) {
         die("Could not add Employee " . mysqli_error($dbConn));
     }
     // add bookAuthors
+    $id = mysqli_insert_id($dbConn);
     foreach ($authors as $author_id) {
-        add_book_authors(mysqli_insert_id($dbConn), $author_id);
+        add_book_authors($id, $author_id);
     }
 }
 function add_borrow(int $book_id, int $client_id, int $employee_id, string $return_date)
@@ -153,7 +154,12 @@ function add_borrow(int $book_id, int $client_id, int $employee_id, string $retu
     if (!mysqli_select_db($dbConn, $dbName)) {
         die("Could not select db<br>" . mysqli_connect_error());
     }
-    $sql = "INSERT INTO borrows(BookId, ClientId, EmployeeId, ReturnDate) VALUES($book_id, $client_id, $employee_id, STR_TO_DATE('$return_date', '%YYYY-%MM-%DD'))";
+    $sql = "INSERT INTO borrows(BookId, ClientId, EmployeeId, ReturnDate) VALUES($book_id, $client_id, $employee_id, '$return_date')";
+    $result = mysqli_query($dbConn, $sql);
+    if (!$result) {
+        die("Could not Borrow " . mysqli_error($dbConn));
+    }
+    $sql = "UPDATE books SET IsAvailable=0 WHERE BookId=$book_id";
     $result = mysqli_query($dbConn, $sql);
     if (!$result) {
         die("Could not Borrow " . mysqli_error($dbConn));

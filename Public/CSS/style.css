@@ -190,3 +190,16 @@ a {
 .submit-button:hover {
 	background-color: rgba(139, 69, 19, 0.637);
 }
+.select-button {
+	text-align: center;
+	font-size: 12pt;
+	font-family: 'Luxurious Roman', serif;
+	font-weight: 400;
+	font-style: normal;
+	align-self: end;
+	background-color: saddlebrown;
+}
+
+.select-button:hover {
+	background-color: rgba(139, 69, 19, 0.637);
+}

@@ -36,7 +36,7 @@ function get_unreturned_books()
     ;
     $sql = "SELECT books.*, borrows.ReturnDate
     FROM(SELECT * FROM books INNER JOIN borrows ON books.BookId=borrows.BookId)
-    WHERE books.isAvailable=false 
+    WHERE books.isAvailable=0 
     ORDER BY borrows.ReturnDate ASC";
 }
 
@@ -56,7 +56,7 @@ function get_available_books()
     ;
     $sql = "SELECT *
     FROM books
-    WHERE isAvailable=true
+    WHERE isAvailable=1
     ORDER BY TimesBorrowed DESC";
 }
 
