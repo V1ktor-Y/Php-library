@@ -69,10 +69,21 @@ function delete_borrow(int $borrow_id)
     if (!mysqli_select_db($dbConn, $dbName)) {
         die("Could not select db<br>" . mysqli_connect_error());
     }
+    $sql = "SELECT BookId FROM borrows WHERE BorrowId=$borrow_id";
+    $result = mysqli_query($dbConn, $sql);
+    $book_id = mysqli_fetch_array($result)["BookId"];
+    if (!$result) {
+        die("Could not delete borrow " . mysqli_error($dbConn));
+    }
     $sql = "DELETE FROM borrows WHERE BorrowId=$borrow_id";
     $result = mysqli_query($dbConn, $sql);
     if (!$result) {
         die("Could not delete borrow " . mysqli_error($dbConn));
+    }
+    $sql = "UPDATE books SET IsAvailable=1  WHERE BookId=$book_id";
+    $result = mysqli_query($dbConn, $sql);
+    if (!$result) {
+        die("Could not Borrow " . mysqli_error($dbConn));
     }
 }
 function delete_client(int $client_id)

@@ -1,5 +1,5 @@
 <?php
-function get_books_by_reader()
+function get_books_by_reader(int $id)
 {
     //include '../Misc/config.php'; 
     // ^^ Gives error ^^ "Failed to open stream: No such file or directory in..."
@@ -17,7 +17,11 @@ function get_books_by_reader()
     $sql = "SELECT clients.FirstName, clients.LastName, books.Title
     FROM ((borrows
     INNER JOIN clients ON borrows.ClientId=clients.ClientId)
-    INNER JOIN books ON borrows.BookId=books.BookId)";
+    INNER JOIN books ON borrows.BookId=books.BookId)
+    WHERE clients.ClientId=$id";
+
+    $result = mysqli_query($dbConn, $sql);
+    return $result;
 }
 
 function get_unreturned_books()
@@ -35,9 +39,12 @@ function get_unreturned_books()
     }
     ;
     $sql = "SELECT books.*, borrows.ReturnDate
-    FROM(SELECT * FROM books INNER JOIN borrows ON books.BookId=borrows.BookId)
-    WHERE books.isAvailable=0 
-    ORDER BY borrows.ReturnDate ASC";
+    FROM books
+    INNER JOIN borrows ON books.BookId = borrows.BookId
+    WHERE books.isAvailable = 0
+    ORDER BY borrows.ReturnDate ASC;";
+    $result = mysqli_query($dbConn, $sql);
+    return $result;
 }
 
 function get_available_books()
@@ -58,6 +65,8 @@ function get_available_books()
     FROM books
     WHERE isAvailable=1
     ORDER BY TimesBorrowed DESC";
+    $result = mysqli_query($dbConn, $sql);
+    return $result;
 }
 
 function get_top_three_books()
@@ -73,11 +82,13 @@ function get_top_three_books()
     if (!mysqli_select_db($dbConn, $dbName)) {
         die("Could not select db<br>" . mysqli_connect_error());
     }
-    ;
+
     $sql = "SELECT *
     FROM books
     ORDER BY TimesBorrowed DESC
     LIMIT 3";
+    $result = mysqli_query($dbConn, $sql);
+    return $result;
 }
 
 function get_borrowed_books_for_period(string $lower, string $upper)
@@ -94,9 +105,12 @@ function get_borrowed_books_for_period(string $lower, string $upper)
         die("Could not select db<br>" . mysqli_connect_error());
     }
     ;
-    $sql = "SELECT books.*, borrows.ReturnDate 
-    FROM(SELECT * FROM books INNER JOIN borrows ON books.BookId=borrows.BookId)
-    WHERE borrows.ReturnDate > STR_TO_DATE('$lower', '%YYYY-%MM-%DD') AND borrows.ReturnDate < STR_TO_DATE('$upper', '%YYYY-%MM-%DD')";
+    $sql = "SELECT sub.Title, sub.ReturnDate 
+    FROM(SELECT books.Title, borrows.ReturnDate FROM books INNER JOIN borrows ON books.BookId=borrows.BookId) AS sub
+    WHERE sub.ReturnDate > '$lower' AND sub.ReturnDate < '$upper'
+    ORDER BY sub.ReturnDate ASC";
+    $result = mysqli_query($dbConn, $sql);
+    return $result;
 }
 
 function get_most_active_readers()
@@ -118,5 +132,7 @@ function get_most_active_readers()
     JOIN borrows ON clients.ClientId = borrows.ClientId
     GROUP BY clients.ClientId, clients.FirstName, clients.LastName
     ORDER BY order_count DESC";
+    $result = mysqli_query($dbConn, $sql);
+    return $result;
 }
 ?>

@@ -159,7 +159,7 @@ function add_borrow(int $book_id, int $client_id, int $employee_id, string $retu
     if (!$result) {
         die("Could not Borrow " . mysqli_error($dbConn));
     }
-    $sql = "UPDATE books SET IsAvailable=0 WHERE BookId=$book_id";
+    $sql = "UPDATE books SET IsAvailable=0, TimesBorrowed=TimesBorrowed+1 WHERE BookId=$book_id";
     $result = mysqli_query($dbConn, $sql);
     if (!$result) {
         die("Could not Borrow " . mysqli_error($dbConn));

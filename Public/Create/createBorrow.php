@@ -63,7 +63,19 @@
             <a href="../Read/read.php">Query</a>
         </div>
     </div>
-
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $book = $_POST["book"];
+        $client = $_POST["client"];
+        $employee = $_POST["employee"];
+        $date = $_POST["date"];
+        if (!$book || !$client || !$employee || !$date) {
+            die("Please fill in all fields");
+        }
+        include '../../Private/CRUD/create.php';
+        add_borrow($book, $client, $employee, $date);
+    }
+    ?>
     <div class="grid">
         <div class="grid-elem">
             <h2>Create Borrow</h2>
@@ -141,21 +153,14 @@
 
                 Return Date <input type="date" name="date" class="select-button"><br>
                 <br><input type="submit" class="submit-button"><br>
-            </form>
-            <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $book = $_POST["book"];
-                $client = $_POST["client"];
-                $employee = $_POST["employee"];
-                $date = $_POST["date"];
-                if (!$book || !$client || !$employee || !$date) {
-                    die("Please fill in all fields");
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    echo "Borrow created";
                 }
-                include '../../Private/CRUD/create.php';
-                add_borrow($book, $client, $employee, $date);
-                echo "Borrow created";
-            }
-            ?>
+
+                ?>
+            </form>
+
         </div>
     </div>
 

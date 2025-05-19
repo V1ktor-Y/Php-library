@@ -60,7 +60,7 @@ a {
 	font-family: 'Luxurious Roman', serif;
 	font-weight: 400;
 	font-style: normal;
-	transform: translate(20%, 30%);
+	transform: translate(100%, 30%);
 	display: inline-block;
 }
 
@@ -73,7 +73,7 @@ a {
 	font-family: 'Luxurious Roman', serif;
 	font-weight: 400;
 	font-style: normal;
-	transform: translate(20%, 30%);
+	transform: translate(100%, 30%);
 	display: inline-block;
 }
 
@@ -86,7 +86,7 @@ a {
 	font-family: 'Luxurious Roman', serif;
 	font-weight: 400;
 	font-style: normal;
-	transform: translate(-20%, 30%);
+	transform: translate(-100%, 30%);
 	display: inline-block;
 }
 
@@ -99,7 +99,7 @@ a {
 	font-family: 'Luxurious Roman', serif;
 	font-weight: 400;
 	font-style: normal;
-	transform: translate(-25%, 30%);
+	transform: translate(-110%, 30%);
 	display: inline-block;
 }
 
